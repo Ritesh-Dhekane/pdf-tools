@@ -1,6 +1,0 @@
-flask
-pypdf
-pikepdf
-pymupdf
-pdf2docx
-Pillow
