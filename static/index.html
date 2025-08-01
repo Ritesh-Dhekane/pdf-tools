@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Simple PDF Tool</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
     <h1>Simple PDF Tool</h1>
-    <p>Upload PDFs and perform operations like merge, split, compress, convert</p>
+    <p>Upload PDFs to Merge, Split, Compress, or Convert to Images</p>
   </header>
 
   <main>
     <section id="operations">
-      <button data-op="merge">Merge PDFs</button>
-      <button data-op="split">Split PDF</button>
-      <button data-op="compress">Compress PDF</button>
-      <button data-op="pdf2img">PDF to Images</button>
+      <button data-op="merge" class="op-btn">Merge PDFs</button>
+      <button data-op="split" class="op-btn">Split PDF</button>
+      <button data-op="compress" class="op-btn">Compress PDF</button>
+      <button data-op="pdf2img" class="op-btn">PDF to Images</button>
     </section>
 
     <section id="upload-section" class="hidden">
@@ -25,7 +25,6 @@
 
       <form id="upload-form" enctype="multipart/form-data">
         <div id="file-inputs-container"></div>
-
         <button type="submit">Run Operation</button>
         <button type="button" id="cancel-btn">Cancel</button>
       </form>

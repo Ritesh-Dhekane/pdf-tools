@@ -1,31 +1,23 @@
 const ops = {
   merge: {
     title: "Merge PDFs",
-    multiple: true,
-    inputCount: null, // multiple files, user selects how many
-    api: "/api/merge",
     multipleFiles: true,
+    api: "/api/merge",
   },
   split: {
     title: "Split PDF",
-    multiple: false,
-    inputCount: 1,
-    api: "/api/split",
     multipleFiles: false,
+    api: "/api/split",
   },
   compress: {
     title: "Compress PDF",
-    multiple: false,
-    inputCount: 1,
-    api: "/api/compress",
     multipleFiles: false,
+    api: "/api/compress",
   },
   pdf2img: {
     title: "Convert PDF to Images (PNG)",
-    multiple: false,
-    inputCount: 1,
-    api: "/api/pdf2img",
     multipleFiles: false,
+    api: "/api/pdf2img",
   },
 };
 
@@ -58,22 +50,14 @@ function showUploadForm(op) {
   statusDiv.textContent = "";
   fileInputsContainer.innerHTML = "";
 
+  const input = document.createElement("input");
+  input.type = "file";
+  input.name = op.multipleFiles ? "files" : "file";
+  input.accept = "application/pdf";
   if (op.multipleFiles) {
-    // allow multiple files selector for this op
-    const input = document.createElement("input");
-    input.type = "file";
-    input.name = "files";
     input.multiple = true;
-    input.accept = "application/pdf";
-    fileInputsContainer.appendChild(input);
-  } else {
-    // single file input
-    const input = document.createElement("input");
-    input.type = "file";
-    input.name = "file";
-    input.accept = "application/pdf";
-    fileInputsContainer.appendChild(input);
   }
+  fileInputsContainer.appendChild(input);
 }
 
 function resetForm() {
@@ -90,6 +74,7 @@ uploadForm.addEventListener("submit", async (e) => {
   if (!currentOp) return;
 
   const formData = new FormData(uploadForm);
+  statusDiv.style.color = "black";
   statusDiv.textContent = "Processing... please wait.";
 
   try {
@@ -100,14 +85,13 @@ uploadForm.addEventListener("submit", async (e) => {
 
     if (!response.ok) {
       const errData = await response.json();
+      statusDiv.style.color = "red";
       statusDiv.textContent = `Error: ${errData.error || "Unknown error"}`;
       return;
     }
 
-    // Handle download
     const blob = await response.blob();
 
-    // Get filename from content-disposition header
     let filename = "output.pdf";
     const disposition = response.headers.get("content-disposition");
     if (disposition && disposition.includes("filename=")) {
@@ -126,8 +110,10 @@ uploadForm.addEventListener("submit", async (e) => {
     a.remove();
     window.URL.revokeObjectURL(url);
 
+    statusDiv.style.color = "green";
     statusDiv.textContent = "Download started.";
   } catch (err) {
+    statusDiv.style.color = "red";
     statusDiv.textContent = "An error occurred: " + err.message;
   }
 });

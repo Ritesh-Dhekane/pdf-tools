@@ -1,8 +1,8 @@
 body {
   font-family: Arial, sans-serif;
-  padding: 1rem;
   max-width: 720px;
   margin: auto;
+  padding: 1rem;
   background: #f9f9f9;
   color: #222;
 }
@@ -17,7 +17,7 @@ header {
   margin-bottom: 2rem;
 }
 
-#operations button {
+.op-btn {
   margin: 0 0.5rem;
   padding: 0.6rem 1.2rem;
   font-size: 1.1rem;
@@ -27,7 +27,7 @@ header {
 #upload-section {
   background: white;
   border: 1px solid #ccc;
-  padding: 1rem 2rem 2rem 2rem;
+  padding: 1.5rem 2rem;
   border-radius: 6px;
 }
 
@@ -35,7 +35,7 @@ header {
   display: none;
 }
 
-#file-inputs-container input[type="file"] {
+input[type="file"] {
   display: block;
   margin: 1rem 0;
 }
@@ -50,4 +50,5 @@ button[type="submit"], #cancel-btn {
 #status {
   margin-top: 1rem;
   font-weight: bold;
+  color: green;
 }
